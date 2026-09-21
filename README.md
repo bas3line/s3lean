@@ -170,7 +170,10 @@ Neither is on by default. The core has no HTTP dependency.
 
 ## Minimum supported Rust
 
-1.75.
+1.75 for the core. The `reqwest` and `ureq` features follow those crates'
+own floors, which track the TLS stack beneath them (1.85 at the time of
+writing); on an older toolchain the core still builds, and you send the
+signed request with whatever client you have.
 
 ## License
 
