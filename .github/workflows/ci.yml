@@ -28,12 +28,16 @@ jobs:
           RUSTDOCFLAGS: -D warnings
 
   msrv:
-    name: builds on the minimum supported Rust
+    # The core — the signer and nothing else — builds on 1.75. The transports
+    # follow reqwest's and ureq's own floors, which move with the TLS stack
+    # beneath them (zeroize 1.9 already needs edition 2024, so Cargo 1.85); a
+    # user pinned to an older toolchain still has the core.
+    name: core builds on the minimum supported Rust
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@1.75
-      - run: cargo build --all-features
+      - run: cargo build
 
   live:
     name: every operation against MinIO
