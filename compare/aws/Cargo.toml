@@ -1,0 +1,15 @@
+[package]
+name = "cmp-aws"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+aws-config = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio"] }
+aws-credential-types = "1"
+aws-sdk-s3 = { version = "1", default-features = false, features = ["behavior-version-latest", "rt-tokio", "rustls"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+[workspace]
